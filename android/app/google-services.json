@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "130772079120",
+    "project_id": "class-pulse-bip",
+    "storage_bucket": "class-pulse-bip.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130772079120:android:fc55862772a5a230003095",
+        "android_client_info": {
+          "package_name": "com.example.classroom_mood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130772079120-kpail5fibggdg8shmcit2pvchupvi8a3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.classroom_mood",
+            "certificate_hash": "06dd84c239cafa8ddaf88af91d9b21cd9b8a2d9f"
+          }
+        },
+        {
+          "client_id": "130772079120-ceot2cl75f5fualc34k31unjqr241urh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJjD9UPxNLOPMeHV2uzJOz7NzgKEHl4io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130772079120-ceot2cl75f5fualc34k31unjqr241urh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130772079120-kitr18ohpmvc588ipe6fu971b05s75pj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.classroomMood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
