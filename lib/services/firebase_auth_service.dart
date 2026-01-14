@@ -16,7 +16,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<void> logIn() async {
+  Future<void> googleLogIn() async {
     try {
       final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
@@ -44,4 +44,16 @@ class FirebaseAuthService implements AuthService {
 
   @override
   User? get user => _firebaseAuth.currentUser;
+
+  @override
+  Future<void> logIn(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
 }

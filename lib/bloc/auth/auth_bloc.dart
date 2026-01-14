@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthEventLogIn>((event, emit) async {
       try {
-        await _authService.logIn();
+        await _authService.googleLogIn();
         emit(AuthStateLoggedIn(user: user!));
       } on Exception catch (e) {
         emit(AuthStateLoggedOut(e: e));
