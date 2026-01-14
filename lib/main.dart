@@ -1,25 +1,21 @@
+import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/pages/login_pages.dart';
+import 'package:class_pulse/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ClassPulse',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+  runApp(
+    BlocProvider(
+      create: (context) => AuthBloc(FirebaseAuthService()),
+      child: MaterialApp(
+        title: 'ClassPulse',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+        home: const LoginPage(),
       ),
-      home: const LoginPage(),
-    );
-  }
+    ),
+  );
 }
 
 class MyHomePage extends StatefulWidget {
