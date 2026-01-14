@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 class Session extends Equatable {
   final String sessionId;
   final String subject;
-  final String teacher; //nom ou id
+  final String teacher;
   final DateTime dateTime;
   final bool isSubmitted;
 
@@ -18,31 +18,36 @@ class Session extends Equatable {
     this.isSubmitted = false,
   });
 
-  Map<String, dynamic> toMap() => {
-    'sessionId': sessionId,
-    'subject': subject,
-    'teacher': teacher,
-    'dateTime': dateTime.toUtc().millisecondsSinceEpoch,
-    'isSubmitted': isSubmitted,
-  };
+  Map<String, dynamic> toMap() =>
+      {
+        'sessionId': sessionId,
+        'subject': subject,
+        'teacher': teacher,
+        'dateTime': dateTime
+            .toUtc()
+            .millisecondsSinceEpoch,
+        'isSubmitted': isSubmitted,
+      };
 
-  factory Session.fromMap(Map<String, dynamic> map) => Session(
-    sessionId: map['sessionId'] as String,
-    subject: map['subject'] as String,
-    teacher: map['teacher'] as String,
-    dateTime: DateTime.fromMillisecondsSinceEpoch(
-      (map['dateTime'] as int),
-      isUtc: true,
-    ).toLocal(),
-    isSubmitted: map['isSubmitted'] as bool,
-  );
+  factory Session.fromMap(Map<String, dynamic> map) =>
+      Session(
+        sessionId: map['sessionId'] as String,
+        subject: map['subject'] as String,
+        teacher: map['teacher'] as String,
+        dateTime: DateTime.fromMillisecondsSinceEpoch(
+          (map['dateTime'] as int),
+          isUtc: true,
+        ).toLocal(),
+        isSubmitted: map['isSubmitted'] as bool,
+      );
 
   @override
-  List<Object?> get props => [
-    sessionId,
-    subject,
-    teacher,
-    dateTime,
-    isSubmitted,
-  ];
+  List<Object?> get props =>
+      [
+        sessionId,
+        subject,
+        teacher,
+        dateTime,
+        isSubmitted,
+      ];
 }
