@@ -1,4 +1,4 @@
-import 'package:class_pulse/pages/signup_page.dart';
+import 'package:class_pulse/pages/auth/signup_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
