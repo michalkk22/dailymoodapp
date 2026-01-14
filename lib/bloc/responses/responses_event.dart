@@ -5,10 +5,10 @@ abstract class ResponsesEvent {
   const ResponsesEvent();
 }
 
-class ResponsesEventSelectedSession {
+class ResponsesEventSelectedSession extends ResponsesEvent {
   final Session session;
 
-  ResponsesEventSelectedSession({required this.session});
+  const ResponsesEventSelectedSession({required this.session});
 }
 
 class ResponsesEventLeftSession extends ResponsesEvent {
