@@ -8,4 +8,35 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthService _authService;
+  User? get user => _authService.user;
+
+  AuthBloc(this._authService) : super(AuthStateLoggedOut()) {
+    on<AuthEventInitialize>((event, emit) async {
+      await _authService.initialize();
+
+      if (user != null) {
+        emit(AuthStateLoggedIn(user: user!));
+      } else {
+        emit(AuthStateLoggedOut());
+      }
+    });
+
+    on<AuthEventLogIn>((event, emit) async {
+      try {
+        await _authService.logIn();
+        emit(AuthStateLoggedIn(user: user!));
+      } on Exception catch (e) {
+        emit(AuthStateLoggedOut(e: e));
+      }
+    });
+
+    on<AuthEventLogOut>((event, emit) async {
+      try {
+        await _authService.logOut();
+        emit(AuthStateLoggedIn(user: user!));
+      } on Exception catch (e) {
+        emit(AuthStateLoggedOut(e: e));
+      }
+    });
+  }
 }

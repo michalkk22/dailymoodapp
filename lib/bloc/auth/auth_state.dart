@@ -6,9 +6,9 @@ abstract class AuthState {
 }
 
 class AuthStateLoggedOut extends AuthState {
-  final Exception e;
+  final Exception? e;
 
-  const AuthStateLoggedOut({required this.e});
+  const AuthStateLoggedOut({this.e});
 }
 
 class AuthStateLoggedIn extends AuthState {
