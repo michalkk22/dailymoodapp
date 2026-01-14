@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(
     BlocProvider(
-      create: (context) => AuthBloc(FirebaseAuthService()),
+      create: (context) =>
+          AuthBloc(FirebaseAuthService())..add(AuthEventInitialize()),
       child: MaterialApp(
         title: 'ClassPulse',
         debugShowCheckedModeBanner: false,
