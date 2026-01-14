@@ -1,5 +1,7 @@
-import 'package:class_pulse/pages/signup_page.dart';
+import 'package:class_pulse/bloc/auth/auth_bloc.dart';
+import 'package:class_pulse/pages/auth/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -118,7 +120,10 @@ class LoginPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignupPage(),
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<AuthBloc>(),
+                            child: const SignupPage(),
+                          ),
                         ),
                       );
                     },
