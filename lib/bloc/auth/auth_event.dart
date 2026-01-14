@@ -10,7 +10,19 @@ class AuthEventInitialize extends AuthEvent {
 }
 
 class AuthEventLogIn extends AuthEvent {
-  const AuthEventLogIn();
+  final String email;
+  final String password;
+  const AuthEventLogIn({required this.email, required this.password});
+}
+
+class AuthEventRegister extends AuthEvent {
+  final String email;
+  final String password;
+  const AuthEventRegister({required this.email, required this.password});
+}
+
+class AuthEventGoogleLogIn extends AuthEvent {
+  const AuthEventGoogleLogIn();
 }
 
 class AuthEventLogOut extends AuthEvent {

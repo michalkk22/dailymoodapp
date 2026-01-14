@@ -1,5 +1,6 @@
+import 'package:class_pulse/data/models/user.dart';
 import 'package:class_pulse/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService implements AuthService {
@@ -16,7 +17,7 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Future<void> logIn() async {
+  Future<void> googleLogIn() async {
     try {
       final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
@@ -43,5 +44,35 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  User? get user => _firebaseAuth.currentUser;
+  Future<void> logIn(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  @override
+  User? get user {
+    final uid = _firebaseAuth.currentUser?.uid;
+    if (uid != null) {
+      return User(userId: uid);
+    }
+    return null;
+  }
+
+  @override
+  Future<void> register(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
 }

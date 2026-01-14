@@ -6,10 +6,10 @@ enum UserRole { teacher, student }
 
 class User extends Equatable {
   final String userId;
-  final String name;
-  final UserRole role;
+  final String? name;
+  final UserRole? role;
 
-  const User({required this.userId, required this.name, required this.role});
+  const User({required this.userId, this.name, this.role});
 
   Map<String, dynamic> toMap() => {
     'userId': userId,
