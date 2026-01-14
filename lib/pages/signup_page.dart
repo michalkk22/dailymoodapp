@@ -1,8 +1,7 @@
-import 'package:class_pulse/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +12,22 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
-              const SizedBox(height: 60),
+              const SizedBox(height: 100),
+
               // --- Logo and title ---
               Image.asset('assets/logo2.png', height: 200),
               const SizedBox(height: 10),
+              const Text(
+                'Create Account',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2D5A88),
+                ),
+              ),
               const SizedBox(height: 40),
 
-              // --- Form ---
+              // --- Form Box ---
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
@@ -36,17 +44,20 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Email or nickname",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    const Text("Email", style: TextStyle(color: Colors.grey)),
                     const SizedBox(height: 8),
                     _buildTextField("Enter your email"),
                     const SizedBox(height: 16),
-                    _buildTextField("Enter your password", isPassword: true),
+
+                    const Text(
+                      "Password",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildTextField("Create a password", isPassword: true),
                     const SizedBox(height: 24),
 
-                    // --- Login button ---
+                    // --- Sign Up button ---
                     SizedBox(
                       width: double.infinity,
                       height: 50,
@@ -54,50 +65,17 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF4A90E2),
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                         child: const Text(
-                          "Log In",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    const Row(
-                      children: [
-                        Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            "Or",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ),
-                        Expanded(child: Divider()),
-                      ],
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    // --- Google button ---
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: Image.asset('assets/google.png', height: 20),
-                        label: const Text(
-                          "Continue with Google",
-                          style: TextStyle(color: Colors.black87),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Color(0xFFE0E0E0)),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          "Sign Up",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -108,22 +86,20 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // --- SIGN UP ---
+              // --- Link for login ---
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account? "),
-                  InkWell(
+                  const Text(
+                    "Already have an account? ",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupPage(),
-                        ),
-                      );
+                      Navigator.pop(context);
                     },
                     child: const Text(
-                      "Sign Up",
+                      "Log In",
                       style: TextStyle(
                         color: Color(0xFF2D5A88),
                         fontWeight: FontWeight.bold,
@@ -132,7 +108,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
             ],
           ),
@@ -159,7 +134,7 @@ class LoginPage extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Color(0xFF4A90E2)),
+          borderSide: const BorderSide(color: Color(0xFF4A90E2), width: 1.5),
         ),
       ),
     );
