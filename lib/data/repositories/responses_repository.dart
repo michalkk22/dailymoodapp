@@ -5,5 +5,7 @@ abstract interface class ResponsesRepository {
 
   Future<void> add(String sessionId, Response response);
 
+  Future<void> update(String sessionId, Response response);
+
   Future<void> delete(String sessionId, Response response);
 }
