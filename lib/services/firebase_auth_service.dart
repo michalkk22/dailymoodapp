@@ -63,4 +63,16 @@ class FirebaseAuthService implements AuthService {
     }
     return null;
   }
+
+  @override
+  Future<void> register(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
 }
