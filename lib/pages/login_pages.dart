@@ -54,14 +54,6 @@ class _LoginPageState extends State<LoginPage> {
                 // --- Logo and title ---
                 Image.asset('assets/logo2.png', height: 200),
                 const SizedBox(height: 10),
-                const Text(
-                  'ClassPulse',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2D5A88),
-                  ),
-                ),
                 const SizedBox(height: 40),
 
                 // --- Form ---
