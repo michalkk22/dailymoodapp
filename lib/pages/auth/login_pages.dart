@@ -132,7 +132,9 @@ class _LoginPageState extends State<LoginPage> {
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
-                                "Or", style: TextStyle(color: Colors.grey)),
+                              "Or",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ),
                           Expanded(child: Divider(color: Colors.grey.shade300)),
                         ],
@@ -154,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                           label: const Text(
                             "Continue with Google",
                             style: TextStyle(
-                                color: Colors.black87, fontSize: 16),
+                              color: Colors.black87,
+                              fontSize: 16,
+                            ),
                           ),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Color(0xFFE0E0E0)),
@@ -182,7 +186,10 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignupPage(),
+                            builder: (context) => BlocProvider.value(
+                              value: context.read<AuthBloc>(),
+                              child: const SignupPage(),
+                            ),
                           ),
                         );
                       },
@@ -205,7 +212,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildTextField(String hint, {
+  Widget _buildTextField(
+    String hint, {
     required TextEditingController controller,
     bool isPassword = false,
   }) {
@@ -216,7 +224,9 @@ class _LoginPageState extends State<LoginPage> {
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16, vertical: 12),
+          horizontal: 16,
+          vertical: 12,
+        ),
         filled: true,
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
