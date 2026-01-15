@@ -3,10 +3,7 @@ import '../models/response.dart';
 import 'responses_repository.dart';
 
 class FirebaseResponsesRepository implements ResponsesRepository {
-  final FirebaseFirestore _firestore;
-
-  FirebaseResponsesRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Stream<List<Response>> responses(String sessionId) {
@@ -16,10 +13,10 @@ class FirebaseResponsesRepository implements ResponsesRepository {
         .collection('responses')
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return Response.fromMap(doc.data());
-      }).toList();
-    });
+          return snapshot.docs.map((doc) {
+            return Response.fromMap(doc.data());
+          }).toList();
+        });
   }
 
   @override
