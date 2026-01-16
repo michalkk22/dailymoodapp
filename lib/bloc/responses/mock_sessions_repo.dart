@@ -42,7 +42,7 @@ class MockSessionsRepo implements SessionsRepository {
   }
 
   Future<void> _addOnce() async {
-    await Future.delayed(Duration(seconds: 15));
+    await Future.delayed(Duration(seconds: 10));
     _controller.add(_sessions);
   }
 
@@ -62,15 +62,6 @@ class MockSessionsRepo implements SessionsRepository {
 
   @override
   Stream<List<Session>> sessions() {
-    print('sessions stream');
-    return Stream.value([
-      Session(
-        dateTime: DateTime.now(),
-        sessionId: '123',
-        subject: 'sujbect',
-        teacher: 'teacher name',
-        isSubmitted: false,
-      ),
-    ]);
+    return _controller.stream;
   }
 }

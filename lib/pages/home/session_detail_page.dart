@@ -14,8 +14,7 @@ class SessionDetailPage extends StatelessWidget {
 
     // Dummy-Daten für die Demo – hier könntest du später echte Werte aus ResponsesBloc nehmen
     const moodCounts = [10, 4, 2, 1, 1];
-    final totalResponses =
-        moodCounts.fold<int>(0, (sum, v) => sum + v);
+    final totalResponses = moodCounts.fold<int>(0, (sum, v) => sum + v);
 
     final dayLabel = _dayLabel(session.dateTime);
     final timeLabel = _timeLabel(session.dateTime);
@@ -28,10 +27,7 @@ class SessionDetailPage extends StatelessWidget {
         foregroundColor: const Color(0xFF2D5A88),
         title: Text(
           '${session.subject} – $dayLabel, $timeLabel',
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color(0xFF2D5A88),
-          ),
+          style: const TextStyle(fontSize: 16, color: Color(0xFF2D5A88)),
         ),
       ),
       body: SafeArea(
@@ -42,10 +38,7 @@ class SessionDetailPage extends StatelessWidget {
             children: [
               Text(
                 "${session.teacher}'s Class",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey.shade700,
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
               ),
               const SizedBox(height: 16),
 
@@ -124,9 +117,7 @@ class SessionDetailPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    const _MoodBarChart(
-                      counts: moodCounts,
-                    ),
+                    const _MoodBarChart(counts: moodCounts),
                     const SizedBox(height: 18),
                     const Text(
                       'Mood History',
@@ -141,10 +132,8 @@ class SessionDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: moods
                           .map(
-                            (m) => Text(
-                              m,
-                              style: const TextStyle(fontSize: 26),
-                            ),
+                            (m) =>
+                                Text(m, style: const TextStyle(fontSize: 26)),
                           )
                           .toList(),
                     ),
@@ -178,12 +167,7 @@ class _EmojiBubble extends StatelessWidget {
           width: selected ? 2 : 1,
         ),
       ),
-      child: Center(
-        child: Text(
-          emoji,
-          style: const TextStyle(fontSize: 24),
-        ),
-      ),
+      child: Center(child: Text(emoji, style: const TextStyle(fontSize: 24))),
     );
   }
 }
@@ -220,10 +204,7 @@ class _MoodBarChart extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   ['Mon', 'Wed', 'Thu', 'Fri', 'Sat'][i],
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
                 ),
               ],
             ),
@@ -243,7 +224,7 @@ String _dayLabel(DateTime dt) {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday'
+    'Sunday',
   ];
   return days[dt.weekday - 1];
 }
