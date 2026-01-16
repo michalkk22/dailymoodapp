@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/session_model.dart';
+import 'package:class_pulse/data/models/session.dart';
 
 class SessionDetailPage extends StatelessWidget {
   static const routeName = '/session_detail';
@@ -11,8 +11,14 @@ class SessionDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moods = ['😄', '🙂', '😐', '😡', '😴'];
+
+    // Dummy-Daten für die Demo – hier könntest du später echte Werte aus ResponsesBloc nehmen
+    const moodCounts = [10, 4, 2, 1, 1];
     final totalResponses =
-        session.moodCounts.fold<int>(0, (sum, v) => sum + v);
+        moodCounts.fold<int>(0, (sum, v) => sum + v);
+
+    final dayLabel = _dayLabel(session.dateTime);
+    final timeLabel = _timeLabel(session.dateTime);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF0F4F8),
@@ -21,7 +27,7 @@ class SessionDetailPage extends StatelessWidget {
         elevation: 0,
         foregroundColor: const Color(0xFF2D5A88),
         title: Text(
-          '${session.subject} – ${session.dayLabel}, ${session.timeLabel}',
+          '${session.subject} – $dayLabel, $timeLabel',
           style: const TextStyle(
             fontSize: 16,
             color: Color(0xFF2D5A88),
@@ -35,7 +41,7 @@ class SessionDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${session.teacher}’s Class',
+                "${session.teacher}'s Class",
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey.shade700,
@@ -74,7 +80,7 @@ class SessionDetailPage extends StatelessWidget {
                       children: moods.map((m) {
                         return _EmojiBubble(
                           emoji: m,
-                          selected: m == '😄',
+                          selected: m == '😄', // einfach ein Beispiel
                         );
                       }).toList(),
                     ),
@@ -118,7 +124,9 @@ class SessionDetailPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _MoodBarChart(counts: session.moodCounts),
+                    const _MoodBarChart(
+                      counts: moodCounts,
+                    ),
                     const SizedBox(height: 18),
                     const Text(
                       'Mood History',
@@ -223,4 +231,27 @@ class _MoodBarChart extends StatelessWidget {
       ),
     );
   }
+}
+
+// Hilfsfunktionen für Tag & Zeit aus deiner Session.dateTime
+
+String _dayLabel(DateTime dt) {
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  return days[dt.weekday - 1];
+}
+
+String _timeLabel(DateTime dt) {
+  final h = dt.hour;
+  final m = dt.minute.toString().padLeft(2, '0');
+  final suffix = h >= 12 ? 'pm' : 'am';
+  final h12 = h == 0 ? 12 : (h > 12 ? h - 12 : h);
+  return '$h12:$m$suffix';
 }
