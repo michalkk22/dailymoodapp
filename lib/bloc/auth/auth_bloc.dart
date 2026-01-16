@@ -58,6 +58,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthStateLoggedOut(e: e));
       }
     });
+
+    on<AuthEventSetData>((event, emit) async {
+      try {
+        await _usersRepo.setUserData(event.user);
+        await _tryToLogIn(emit);
+      } on Exception catch (e) {
+        emit(AuthStateLoggedOut(e: e));
+      }
+    });
   }
 
   Future<void> _tryToLogIn(Emitter<AuthState> emit) async {
