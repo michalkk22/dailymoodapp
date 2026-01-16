@@ -28,3 +28,9 @@ class AuthEventGoogleLogIn extends AuthEvent {
 class AuthEventLogOut extends AuthEvent {
   const AuthEventLogOut();
 }
+
+class AuthEventSetData extends AuthEvent {
+  final User user;
+
+  const AuthEventSetData({required this.user});
+}

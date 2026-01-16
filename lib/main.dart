@@ -1,4 +1,5 @@
 import 'package:class_pulse/bloc/auth/auth_bloc.dart';
+import 'package:class_pulse/data/repositories/firebase_users_repository.dart';
 import 'package:class_pulse/pages/auth/auth_page.dart';
 import 'package:class_pulse/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,13 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     BlocProvider(
       create: (context) =>
-      AuthBloc(FirebaseAuthService())
-        ..add(const AuthEventInitialize()),
+          AuthBloc(FirebaseAuthService(), FirebaseUsersRepository())
+            ..add(const AuthEventInitialize()),
       child: MaterialApp(
         title: 'ClassPulse',
         debugShowCheckedModeBanner: false,
