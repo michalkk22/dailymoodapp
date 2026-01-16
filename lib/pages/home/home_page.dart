@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SessionsBloc(MockSessionsRepo()),
+      create: (context) =>
+          SessionsBloc(MockSessionsRepo())..add(SessionsEventInitialize()),
       child: BlocBuilder<SessionsBloc, SessionsState>(
         builder: (context, state) {
           final user = context.read<AuthBloc>().user;
