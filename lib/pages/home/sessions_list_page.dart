@@ -1,5 +1,6 @@
 import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/data/models/session.dart';
+import 'package:class_pulse/pages/home/session_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,24 @@ class SessionsListPage extends StatelessWidget {
     final name = user?.name ?? 'there';
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Hi $name,',
+          style: const TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF2D5A88),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthBloc>().add(AuthEventLogOut());
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
       backgroundColor: const Color(0xFFF0F4F8),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -20,21 +39,10 @@ class SessionsListPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hi $name,',
-                style: const TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF2D5A88),
-                ),
-              ),
               const SizedBox(height: 6),
               Text(
                 'Here are your sessions.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade700,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
               ),
               const SizedBox(height: 18),
 
@@ -58,48 +66,54 @@ class _SessionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final time = _formatTime(session.dateTime);
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 22,
-            offset: const Offset(0, 10),
+    return TextButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SessionDetailPage(session: session),
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  session.subject,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF1F2D3D),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  '$time · ${session.teacher}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey.shade700,
-                  ),
-                ),
-              ],
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 22,
+              offset: const Offset(0, 10),
             ),
-          ),
-          const SizedBox(width: 12),
-          _StatusPill(isSubmitted: session.isSubmitted),
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    session.subject,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF1F2D3D),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '$time · ${session.teacher}',
+                    style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            _StatusPill(isSubmitted: session.isSubmitted),
+          ],
+        ),
       ),
     );
   }
@@ -123,11 +137,7 @@ class _StatusPill extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: fg,
-          fontWeight: FontWeight.w700,
-          fontSize: 13,
-        ),
+        style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 13),
       ),
     );
   }
@@ -160,7 +170,10 @@ class _EmptyStateCard extends StatelessWidget {
               color: const Color(0xFFE8F0FE),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Icon(Icons.event_busy_rounded, color: Color(0xFF2D5A88)),
+            child: const Icon(
+              Icons.event_busy_rounded,
+              color: Color(0xFF2D5A88),
+            ),
           ),
           const SizedBox(width: 14),
           Expanded(
