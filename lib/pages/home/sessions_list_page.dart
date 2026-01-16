@@ -10,8 +10,19 @@ class SessionsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<AuthBloc>().user;
+    final name = user?.name ?? 'there';
+
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          'Hi $name,',
+          style: const TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF2D5A88),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -20,6 +31,28 @@ class SessionsListPage extends StatelessWidget {
             icon: Icon(Icons.logout),
           ),
         ],
+      ),
+      backgroundColor: const Color(0xFFF0F4F8),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 6),
+              Text(
+                'Here are your sessions.',
+                style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+              ),
+              const SizedBox(height: 18),
+
+              if (sessions.isEmpty)
+                const _EmptyStateCard()
+              else
+                ...sessions.map((s) => _SessionCard(session: s)),
+            ],
+          ),
+        ),
       ),
     );
   }
