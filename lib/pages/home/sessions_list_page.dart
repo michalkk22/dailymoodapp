@@ -1,5 +1,7 @@
+import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/data/models/session.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SessionsListPage extends StatelessWidget {
   const SessionsListPage({super.key, required this.sessions});
@@ -8,6 +10,17 @@ class SessionsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthBloc>().add(AuthEventLogOut());
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
+    );
   }
 }

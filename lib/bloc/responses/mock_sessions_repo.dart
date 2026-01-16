@@ -15,6 +15,14 @@ class MockSessionsRepo implements SessionsRepository {
   @override
   Stream<List<Session>> sessions() {
     print('sessions stream');
-    return Stream.empty();
+    return Stream.value([
+      Session(
+        dateTime: DateTime.now(),
+        sessionId: '123',
+        subject: 'sujbect',
+        teacher: 'teacher name',
+        isSubmitted: false,
+      ),
+    ]);
   }
 }

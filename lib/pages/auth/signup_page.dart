@@ -114,6 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                                 password: _passwordController.text,
                               ),
                             );
+                            Navigator.of(context).pop();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4A90E2),
