@@ -12,15 +12,14 @@ class User extends Equatable {
   const User({required this.userId, this.name, this.role});
 
   Map<String, dynamic> toMap() => {
-    'userId': userId,
     'name': name,
     'role': role == UserRole.teacher ? 'teacher' : 'student',
   };
 
-  factory User.fromMap(Map<String, dynamic> map, data) => User(
-    userId: map['userId'] as String,
+  factory User.fromMap(Map<String, dynamic> map, String id) => User(
+    userId: id,
     name: map['name'] as String,
-    role: (data['role'] == 'teacher') ? UserRole.teacher : UserRole.student,
+    role: (map['role'] == 'teacher') ? UserRole.teacher : UserRole.student,
   );
 
   @override
