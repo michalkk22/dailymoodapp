@@ -17,8 +17,8 @@ class AuthStateLoggedIn extends AuthState {
   const AuthStateLoggedIn({required this.user});
 }
 
-class AuthStateNeedUserName extends AuthState {
+class AuthStateNeedUserData extends AuthState {
   final User user;
 
-  const AuthStateNeedUserName({required this.user});
+  const AuthStateNeedUserData({required this.user});
 }
