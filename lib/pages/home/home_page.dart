@@ -1,4 +1,3 @@
-import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/bloc/responses/mock_sessions_repo.dart';
 import 'package:class_pulse/bloc/sessions/sessions_bloc.dart';
 import 'package:class_pulse/pages/home/sessions_list_page.dart';
@@ -15,12 +14,17 @@ class HomePage extends StatelessWidget {
           SessionsBloc(MockSessionsRepo())..add(SessionsEventInitialize()),
       child: BlocBuilder<SessionsBloc, SessionsState>(
         builder: (context, state) {
-          final user = context.read<AuthBloc>().user;
-          print(user);
+          //
           if (state is SessionStateLoaded) {
             return SessionsListPage(sessions: state.sessions);
           }
-          return CircularProgressIndicator();
+
+          return const Scaffold(
+            backgroundColor: Color(0xFFF0F4F8),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         },
       ),
     );
