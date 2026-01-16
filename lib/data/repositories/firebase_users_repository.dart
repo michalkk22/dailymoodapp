@@ -15,12 +15,12 @@ class FirebaseUsersRepository implements UsersRepository {
   }
 
   @override
-  Future<User> get(String id) async {
+  Future<User?> get(String id) async {
     try {
       final doc = await _users.doc(id).get();
       final data = doc.data();
       if (data == null) {
-        throw Exception();
+        return null;
       }
       return User.fromMap(data, doc.id);
     } on Exception catch (_) {

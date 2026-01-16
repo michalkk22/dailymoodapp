@@ -15,7 +15,7 @@ class AuthPage extends StatelessWidget {
         if (state is AuthStateLoggedIn) {
           return HomePage();
         } else if (state is AuthStateNeedUserData) {
-          return SetUserDataPage();
+          return SetUserDataPage(user: state.user);
         } else {
           return LoginPage();
         }
@@ -24,6 +24,7 @@ class AuthPage extends StatelessWidget {
         if (state is AuthStateLoggedOut) {
           if (state.e != null) {
             // TODO: add error dialog here
+            print(state.e);
           }
         }
       },

@@ -1,3 +1,4 @@
+import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/bloc/responses/mock_sessions_repo.dart';
 import 'package:class_pulse/bloc/sessions/sessions_bloc.dart';
 import 'package:class_pulse/pages/home/sessions_list_page.dart';
@@ -13,6 +14,8 @@ class HomePage extends StatelessWidget {
       create: (context) => SessionsBloc(MockSessionsRepo()),
       child: BlocBuilder<SessionsBloc, SessionsState>(
         builder: (context, state) {
+          final user = context.read<AuthBloc>().user;
+          print(user);
           if (state is SessionStateLoaded) {
             return SessionsListPage(sessions: state.sessions);
           }

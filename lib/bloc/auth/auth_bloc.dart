@@ -72,10 +72,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _tryToLogIn(Emitter<AuthState> emit) async {
     if (userId != null) {
       user = await _usersRepo.get(userId!);
-      if (user!.name == null || user!.role == null) {
+      if (user == null || user!.name == null || user!.role == null) {
         emit(AuthStateNeedUserData(user: User(userId: userId!)));
       } else {
-        emit(AuthStateLoggedIn(user: User(userId: userId!)));
+        emit(AuthStateLoggedIn(user: user!));
       }
     } else {
       emit(AuthStateLoggedOut());
