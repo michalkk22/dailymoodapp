@@ -1,6 +1,6 @@
 import 'package:class_pulse/bloc/auth/auth_bloc.dart';
 import 'package:class_pulse/pages/auth/login_pages.dart';
-import 'package:class_pulse/pages/auth/set_name_page.dart';
+import 'package:class_pulse/pages/auth/set_user_data_page.dart';
 import 'package:class_pulse/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +14,8 @@ class AuthPage extends StatelessWidget {
       builder: (context, state) {
         if (state is AuthStateLoggedIn) {
           return HomePage();
-        } else if (state is AuthStateNeedUserName) {
-          return SetNamePage();
+        } else if (state is AuthStateNeedUserData) {
+          return SetUserDataPage();
         } else {
           return LoginPage();
         }

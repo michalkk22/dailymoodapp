@@ -15,7 +15,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _authService.initialize();
 
       if (user != null) {
-        emit(AuthStateLoggedIn(user: user!));
+        if (user!.name == null || user!.role == null) {
+          emit(AuthStateNeedUserData(user: user!));
+        } else {
+          emit(AuthStateLoggedIn(user: user!));
+        }
       } else {
         emit(AuthStateLoggedOut());
       }
