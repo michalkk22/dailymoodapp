@@ -79,16 +79,19 @@ class _SetUserDataPageState extends State<SetUserDataPage> {
                     ),
                     const SizedBox(height: 16),
 
-                    const Text(
-                      "Are you teacher?",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    const SizedBox(height: 8),
-                    Checkbox(
-                      value: isTeacher,
-                      onChanged: (value) => setState(() {
-                        isTeacher = value ?? false;
-                      }),
+                    Row(
+                      children: [
+                        const Text(
+                          "Are you teacher?",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Checkbox(
+                          value: isTeacher,
+                          onChanged: (value) => setState(() {
+                            isTeacher = value ?? false;
+                          }),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 24),
 
@@ -118,7 +121,7 @@ class _SetUserDataPageState extends State<SetUserDataPage> {
                           ),
                         ),
                         child: const Text(
-                          "Sign Up",
+                          "Submit",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -130,6 +133,7 @@ class _SetUserDataPageState extends State<SetUserDataPage> {
                   ],
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),

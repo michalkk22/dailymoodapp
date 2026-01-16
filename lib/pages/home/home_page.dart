@@ -10,8 +10,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SessionsBloc(MockSessionsRepo())
-        ..add(const SessionsEventInitialize()),
+      create: (context) =>
+          SessionsBloc(MockSessionsRepo())..add(SessionsEventInitialize()),
       child: BlocBuilder<SessionsBloc, SessionsState>(
         builder: (context, state) {
           //
